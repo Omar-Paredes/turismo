@@ -1,0 +1,18 @@
+.mtop20{
+    margin-top: 20px;
+}
+.boton{
+    background-color: #00986c; 
+    color: white;
+    border-radius: 10px;
+    border-color: #00986c;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+ 
+}
+.boton:hover{
+    background-color: #07c891; 
+    border-color: #07c891;
+    color: white;
+}

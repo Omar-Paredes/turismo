@@ -1,0 +1,85 @@
+.footer {
+  background: #482778;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+.footer .footlogo img {
+  width: 350px;
+  align-items: center;
+}
+
+.footer .linea {
+  border: 0.1px solid white;
+  margin-bottom: 30px;
+}
+
+.footer .linea2 {
+  border: 0.1px solid white;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 1.5rem;
+}
+
+.footer .box-container .box {
+  align-self: center;
+}
+
+.footer .box-container .box2 h3 {
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: 1 rem 0;
+  color: #fff;
+}
+
+.footer .box-container .box p {
+  display: block;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+  padding: 0.5rem 0;
+  text-align: justify;
+  text-decoration: none;
+  font-family: "Arciform", sans-serif;
+}
+
+.footer .box-container .box2 a {
+  display: inline-block;
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 1rem 1rem;
+  width: max-content;
+  border: 1px solid #fff;
+  border-radius:100%;
+  margin:0px 5px;
+}
+
+.footer .box-container .box a i {
+  color: #fff;
+  padding-right: 0.5rem;
+}
+.footer .box-container .box p:hover {
+  color: rgb(74, 193, 224);
+}
+.footer .box-container .box a:hover i {
+  padding-right: 2rem;
+}
+.footer .credit {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding: 1rem;
+  padding-top: 2.5rem;
+  font-size: 1.7rem;
+  color: #fff;
+}
+
+.box2 a:hover {
+  opacity: 0.5;
+}

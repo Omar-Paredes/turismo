@@ -1,0 +1,102 @@
+<div class="backim">
+  <img src="assets/images/bicicletas.webp" alt="" srcset="" />
+  <div class="container-txt-btn">
+    <p  class="txt2-button">Eventos</p>
+  </div>
+</div>
+<!-- Calendar Section Starts -->
+<div class="empty">Mira los eventos de los próximos 6 meses</div>
+<section class="category">
+  <div class="center-calendars">
+    <div class="calendars-container">
+      <app-calendario 
+        [mes]="mesActual"
+        [color]="'rgb(79, 185, 168)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+      <app-calendario 
+        [mes]="(mesActual + 1)"
+        [color]="'rgb(249, 177, 84)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+      <app-calendario 
+        [mes]="(mesActual + 2)"
+        [color]="'rgb(234, 84, 124)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+      <app-calendario 
+        [mes]="(mesActual + 3)"
+        [color]="'rgb(0, 172, 216)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+      <app-calendario 
+        [mes]="(mesActual + 4)"
+        [color]="'rgb(109, 86, 160)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+      <app-calendario 
+        [mes]="(mesActual + 5)"
+        [color]="'rgb(112, 111, 111)'"
+        [events]="events"
+        [setEventsDia]="setEventsDia"
+      ></app-calendario>
+    </div>
+  </div>
+</section>
+<div *ngIf="eventosDia" class="empty" id="text">{{text}}</div>
+<app-atractivo-mapper *ngIf="eventosDia" [atractivos]="eventosDia"></app-atractivo-mapper>
+<!-- Calendar Section Ends -->
+
+<!-- Cards Section Starts -->
+<!-- <section class="information">
+  <div class="box-container">
+    <div class="box">
+        <div class="res_content">
+            <div class="subtitle_cont">
+                <i class="fa-solid fa-book-open"></i>
+                <h2>Actividades Turísticas</h2>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore distinctio nesciunt in molestias illum vero officia alias placeat quas, provident, id facere? Omnis ea deserunt obcaecati praesentium, aliquam ipsa temporibus explicabo, delectus, et totam fuga repellat laboriosam sit debitis repellendus accusamus. Officiis sint, repellendus quod aliquid recusandae omnis ad saepe?</p>
+        </div>
+    </div>
+    
+    <div class="box">
+      <div class="res_content">
+        <div class="subtitle_cont">
+            <i class="fa-solid fa-book-open"></i>
+            <h2>Actividades Culturales</h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore distinctio nesciunt in molestias illum vero officia alias placeat quas, provident, id facere? Omnis ea deserunt obcaecati praesentium, aliquam ipsa temporibus explicabo, delectus, et totam fuga repellat laboriosam sit debitis repellendus accusamus. Officiis sint, repellendus quod aliquid recusandae omnis ad saepe?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box-container2">
+    <div class="box">
+        <div class="res_content2">
+            <div class="subtitle_cont">
+                <i class="fa-solid fa-wallet"></i>
+                <h2>Costos</h2>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore distinctio nesciunt in molestias illum vero officia alias placeat quas, provident, id facere? Omnis ea deserunt obcaecati praesentium, aliquam ipsa temporibus explicabo, delectus</p>
+        </div>
+    </div>
+    
+    <div class="box">
+      <div class="res_content2">
+        <div class="subtitle_cont">
+            <i class="fa-solid fa-clock"></i>
+            <h2>Horarios</h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore distinctio nesciunt in molestias illum vero officia alias placeat quas, provident, id facere? Omnis ea deserunt obcaecati praesentium, aliquam ipsa temporibus explicabo, delectus</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- Cards Section Ends -->
+

@@ -1,0 +1,302 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #showTable>
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Empresas</h2>
+
+          <div class="acciones">
+            <!-- <a href="#" class="btn btn-lila">Ver todo</a> -->
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="openModal(template)"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Nombre</td>
+                <td>Especialidad</td>
+                <td>Foto</td>
+                <td>Ubicacion</td>
+                <td>Tipo Empresa</td>
+                <td>Acciones</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let empresa of empresas; index as i">
+                <th>{{ i + 1 }}</th>
+                <td>{{ empresa.nombre }}</td>
+                <td>{{ empresa.especialidad }}</td>
+                <td>
+                  <img
+                    class="preview-img"
+                    src="{{ empresa.foto }}"
+                    alt="Imagen"
+                  />
+                </td>
+                <td>{{ empresa.altitud }}</td>
+                <td>{{ empresa.nombre_tipo_empresa }}</td>
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-table btn-naranja"
+                      (click)="openModal(template, empresa)"
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-table btn-rojo"
+                      (click)="delete(empresa)"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+          <div class="row">
+            <div class="col-md-12 mtop15">
+              <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese un nombre"
+                [formControl]="nombre"
+              />
+              <small *ngIf="nombre.errors?.required && errores"
+                ><b>Nombre requerido</b></small
+              >
+              <small *ngIf="nombre.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 50 caracteres</b></small
+              >
+              <small *ngIf="nombre.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-12 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Especialidad:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese un especialidad"
+                [formControl]="especialidad"
+              />
+              <small *ngIf="especialidad.errors?.required && errores"
+                ><b>Especialidad requerido</b></small
+              >
+              <small *ngIf="especialidad.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 200 caracteres</b></small
+              >
+              <small *ngIf="especialidad.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-12 modal-file mtop15">
+              <label for="exampleInputEmail1" class="form-label">Foto:</label>
+              <input
+                type="file"
+                (change)="onChange($event)"
+                class="form-control"
+                placeholder="Ingrese una foto"
+                [formControl]="foto"
+              />
+              <small *ngIf="foto.errors?.required && errores"
+                ><b>Foto requerida</b></small
+              >
+              <img
+                class="modal-img"
+                *ngIf="myImage"
+                [src]="myImage"
+                alt="foto"
+              />
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Ubicación:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione ubicación"
+                [formControl]="ubicacion_id"
+              >
+                <option
+                  value="{{ ubicacion.id }}"
+                  *ngFor="let ubicacion of ubicaciones"
+                >
+                  {{ ubicacion.calles }}
+                </option>
+              </select>
+              <small *ngIf="ubicacion_id.errors?.required && errores"
+                ><b>Seleccione una ubicación</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Tipo Empresa:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione tipo de empresa"
+                [formControl]="tipo_empresa_id"
+              >
+                <option
+                  value="{{ tipo_empresa.id }}"
+                  *ngFor="let tipo_empresa of tipo_empresas"
+                >
+                  {{ tipo_empresa.nombre }}
+                </option>
+              </select>
+              <small *ngIf="tipo_empresa_id.errors?.required && errores"
+                ><b>Seleccione un tipo de empresa</b></small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">
+              {{ btnTitle }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <!--  New Customers -->
+      <!-- <div class="recentCustomers">
+      <div class="cardHeader">
+        <h2>Administradores</h2>
+      </div>
+      <table>
+        <tr>
+          <td width="60px">
+            <div class="imgBx">
+              <img src="../../../../assets/images/img1.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Jomar<br /><span>Italy</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img2.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Oscar<br /><span>India</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img3.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Michelle<br /><span>France</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img4.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Michelle<br /><span>USA</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img5.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Mauricio<br /><span>Japan</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img6.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Andrés<br /><span>India</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img7.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Michelle<br /><span>Malaysia</span></h4>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="imgBx">
+              <img src="../../../../assets/images/img8.jpg" alt="" />
+            </div>
+          </td>
+          <td>
+            <h4>Jomar<br /><span>India</span></h4>
+          </td>
+        </tr>
+      </table>
+    </div> -->
+    </div>
+  </div>
+</ng-template>

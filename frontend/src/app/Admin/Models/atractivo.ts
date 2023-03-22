@@ -1,0 +1,16 @@
+export interface IAtractivo{
+    id : number,
+    nombre : string,
+    codigo : string, 
+    descripcion : string,
+    foto: string,
+    imagen : string,
+    video:string,
+    acompaniantes:string,
+    tipo_atractivo_id : number,
+    ubicacion_id : number,
+    accesibilidad_id : number,
+    estacionalidad_id : number,
+    destacado_mes: boolean,
+    fecha: string,
+}

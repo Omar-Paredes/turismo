@@ -1,0 +1,80 @@
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Tipo de Empresas</h2>
+          
+          <div class="acciones">
+            <button type="button" class="btn btn-celeste" (click)="openModal(template)">Agregar</button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Servicio</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let tipo_empresa  of tipo_empresas; index as i">
+                <th>{{ i+1 }}</th>
+                <td>{{ tipo_empresa.nombre }}</td>
+                <td>{{ tipo_empresa.servicio }}</td>
+                <td>{{ tipo_empresa.descripcion }}</td>
+                <td>
+                  <div class="botones">
+                    <button type="button" class="btn btn-naranja" (click)="openModal(template,tipo_empresa)">Modificar</button>
+                    <button type="button" class="btn btn-rojo"(click)="delete(tipo_empresa)">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+      
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" placeholder="Ingrese un nombre" [formControl]="nombre">
+            <small *ngIf="nombre.errors?.required && errores"><b>Nombre requerido</b></small>
+            <small *ngIf="nombre.errors?.maxlength && errores"><b>Este campo no debe superar los 50 caracteres</b></small>
+            <small *ngIf="nombre.errors?.pattern && errores"><b>Caracteres Inválidos</b></small>
+          </div>
+      
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Servicio:</label>
+            <input type="text" class="form-control"  placeholder="Ingrese un servicio" [formControl]="servicio">
+            <small *ngIf="servicio.errors?.required && errores"><b>Servicio requerido</b></small>
+            <small *ngIf="servicio.errors?.maxlength && errores"><b>Este campo no debe superar los 100 caracteres</b></small>
+            <small *ngIf="servicio.errors?.pattern && errores"><b>Caracteres Inválidos</b></small>
+          </div>
+
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Descripcion:</label>
+              <textarea type="text" class="form-control"  placeholder="Ingrese la Distancia" [formControl]="descripcion" rows="5"></textarea>
+              <small *ngIf="descripcion.errors?.required && errores"><b>Descripción requerida</b></small>
+              <small *ngIf="descripcion.errors?.maxlength && errores"><b>Este campo no debe superar los 200 caracteres</b></small>
+              <small *ngIf="descripcion.errors?.pattern && errores"><b>Caracteres Inválidos</b></small>
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">{{ btnTitle }}</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>

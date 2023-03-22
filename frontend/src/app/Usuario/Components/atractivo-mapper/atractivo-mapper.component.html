@@ -1,0 +1,16 @@
+<section class="category">
+  <div class="box-container">
+    <div class="box" *ngFor="let atractivo of atractivos">
+      <div class="flip-box">
+        <img src="{{ atractivo.foto }}" alt="" />
+        <div class="back-box">
+          <p>{{atractivo.descripcion}}</p>
+          <a href="{{ publicUrlVR + atractivo.id }}">Ver más...</a>
+        </div>
+      </div>
+      <a href="{{ publicUrlVR + atractivo.id }}" class="btn">{{
+        atractivo.nombre
+      }}</a>
+    </div>
+  </div>
+</section>

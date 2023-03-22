@@ -1,0 +1,190 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #showTable>
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Ubicaciones</h2>
+
+          <div class="acciones">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="openModal(template)"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Información</th>
+                <th>Distrito</th>
+                <th>Calles</th>
+                <th>Altitud</th>
+                <th>Ubicación Geográfica</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ubicacion of ubicaciones; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td style="width: 30%">{{ ubicacion.informacion }}</td>
+                <td>{{ ubicacion.distrito }}</td>
+                <td>{{ ubicacion.calles }}</td>
+                <td>{{ ubicacion.altitud }}</td>
+                <td>{{ ubicacion.ubicacion_geografica }}</td>
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-naranja"
+                      (click)="openModal(template, ubicacion)"
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-rojo"
+                      (click)="delete(ubicacion)"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Información:</label
+            >
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Ingrese información"
+              [formControl]="informacion"
+              rows="5"
+            ></textarea>
+            <small *ngIf="informacion.errors?.required && errores"
+              ><b>Información requerida</b></small
+            >
+            <small *ngIf="informacion.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 200 caracteres</b></small
+            >
+            <small *ngIf="informacion.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Distrito:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese un distrito"
+              [formControl]="distrito"
+            />
+            <small *ngIf="distrito.errors?.required && errores"
+              ><b>Distrito requerido</b></small
+            >
+            <small *ngIf="distrito.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="distrito.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Calles:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese las calles"
+              [formControl]="calles"
+            />
+            <small *ngIf="calles.errors?.required && errores"
+              ><b>Calles requeridas</b></small
+            >
+            <small *ngIf="calles.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="calles.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Altitud:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese la altitud"
+              [formControl]="altitud"
+            />
+            <small *ngIf="altitud.errors?.required && errores"
+              ><b>Altitud requerida</b></small
+            >
+            <small *ngIf="altitud.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="altitud.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Ubicación Geográfica:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Formato de coordenadas: -17.38437345106091, -66.1349712372849"
+              [formControl]="ubicacion_geografica"
+            />
+            <small *ngIf="ubicacion_geografica.errors?.required && errores"
+              ><b>Ubicación Geográfica requerida</b></small
+            >
+            <small *ngIf="ubicacion_geografica.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 100 caracteres</b></small
+            >
+            <small *ngIf="ubicacion_geografica.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">
+              {{ btnTitle }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

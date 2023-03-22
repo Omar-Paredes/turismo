@@ -1,0 +1,58 @@
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Tipo de Restricciones</h2>
+          <div class="acciones">
+            <!-- <a href="#" class="btn btn-lila">Ver todo</a> -->
+            <button type="button" class="btn btn-celeste" (click)="openModal(template)">Agregar</button>
+          </div>
+        </div>
+        <div class="cardbody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let tipo_restriccion  of tipo_restricciones; index as i">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ tipo_restriccion.nombre }}</td>
+                <td>
+                  <div class="botones">
+                    <button type="button" class="btn btn-naranja" (click)="openModal(template,tipo_restriccion)">Modificar</button>
+                    <button type="button" class="btn btn-rojo"(click)="delete(tipo_restriccion)">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+      
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" placeholder="Ingrese un nombre" [formControl]="nombre">
+            <small *ngIf="nombre.errors?.required && errores"><b>Nombre requerido</b></small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">{{ btnTitle }}</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>

@@ -1,0 +1,18 @@
+<div class="backim">
+  <img src="assets/images/Pique_macho.png" alt="" srcset="" />
+  <div class="container-txt-btn">
+    <p  class="txt2-button">¿Qué hacer?</p>
+  </div>
+</div>
+<!-- Cards Section Starts -->
+<section class="category">
+  <div class="empty" *ngIf="data.length == 0">Por ahora no tenemos datos en este apartado</div>
+  <div class="box-container">
+    <div class="box" *ngFor="let actividad of data">
+      <img src={{actividad.foto}} alt="foto" />
+      <div></div>
+      <a [routerLink]="['/seccion', actividad.id]" class="btn">{{actividad.nombre}}</a>
+    </div>
+  </div>
+</section>
+<!-- Cards Section Ends -->

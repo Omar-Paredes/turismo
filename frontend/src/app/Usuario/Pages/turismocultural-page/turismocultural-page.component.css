@@ -1,0 +1,137 @@
+.backim {
+  width: 100%;
+  height: calc(100dvh - 52px);
+  padding: 0px 0px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.borde {
+  width: 100%;
+  height: 99%;
+  background: none;
+  position: absolute;
+  border: 3px solid white;
+  border-bottom-right-radius: 70px;
+  border-top-right-radius: 70px;
+  right: 5px;
+  top: 5px;
+}
+
+.backim img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* .txt2-button {
+    font-size: 4rem;
+    position: absolute;
+    top: 35%;
+    right: 12rem;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    border: white 2px solid;
+    padding: 1em 20px 1em 20px;
+    border-radius: 0.45em;
+    text-align: center;
+    font-family: "Arciform", sans-serif;
+    font-weight: 400;
+    font-size: 5rem;
+    background: rgba(72, 39, 120, 0.5);
+  } */
+
+.msgBackim {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  background: rgba(72, 39, 120, 0.5);
+  color: white;
+  border: white 2px solid;
+  padding: 3em 30px 3em 30px;
+  border-radius: 1.9em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.msgBackim h2 {
+  font-family: "Arciform", sans-serif;
+  font-weight: 400;
+  font-size: 5rem;
+  line-height: 50px;
+}
+
+.msgBackim p {
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+@media (max-width: 992px) {
+  .msgBackim {
+    left: 50%;
+  }
+}
+
+.txt2-button h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  margin-top: 30px;
+}
+
+.container-btn {
+  width: 270px;
+  height: 50px;
+  background: #57428d;
+  cursor: pointer;
+  margin-top: 1rem;
+  border-radius: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  color: white;
+  font-size: 1.7rem;
+  background-color: transparent;
+  width: 100%;
+}
+.category {
+  background: #44355d;
+}
+.category .box-container {
+  /*   display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 40rem;
+    row-gap: 3rem; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 15rem;
+}
+.category .box-container .box {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  margin: 0px 20px;
+}
+.category .box-container .box img {
+  height: 50rem;
+  width: 40rem; /*before the width was 30rem*/
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+@media (max-width: 430px) {
+  .category .box-container .box img {
+    width: 30rem;
+  }
+}

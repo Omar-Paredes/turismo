@@ -1,0 +1,64 @@
+<!-- Cards Section Starts -->
+<ng-container *ngIf="atractivos.length != 0">
+  <div class="title-360">
+    <h1 class="heading">Vistas en </h1>
+    <h1 class="heading2">360°</h1>
+    <h1 class="heading">de nuestra ciudad </h1>
+  </div>
+  <div class="cards" *ngIf="atractivos.length != 0">
+    <ng-container *ngFor="let atractivo of atractivos">
+      <div (click)="goTo(atractivo.id)" class="card card1" >
+        <div class="container">
+          <img src="{{atractivo.foto}}" alt="img1" />
+        </div>
+        <div class="details">
+          <h3>{{atractivo.nombre}} en 360°</h3>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<!-- <div class="cards">
+  <div [routerLink]="['/que_hacer']" class="card card1">
+    <div class="container">
+      <img src="assets/images/imgin4.jpg" alt="img1" />
+    </div>
+    <div class="details">
+      <h3>Destinos en 360°</h3>
+    </div>
+  </div>
+
+  <div [routerLink]="['/que_hacer']" class="card card2">
+    <div class="container">
+      <img src="assets/images/imgin5.jpg" alt="img1" />
+    </div>
+    <div class="details">
+      <h3>Turismo en 360°</h3>
+    </div>
+  </div>
+
+  <div [routerLink]="['/que_hacer']" class="card card3">
+    <div class="container">
+      <img src="assets/images/imgin6.jpg" alt="img1" />
+    </div>
+    <div class="details">
+      <h3>Atractivos en 360°</h3>
+    </div>
+  </div>
+</div> -->
+
+<div class="mas-link">
+  <a [routerLink]="['/que_hacer']">Más <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+
+<div class="container_video">
+  <h1 class="heading">¡Oh, Cochabamba querida!</h1>
+  <video class="video" controls autoplay muted loop>
+    <source src="assets/images/cocha.mp4" type="video/mp4">
+    <source src="assets/images/cocha.mp4" type="video/ogg">
+    Your browser does not support HTML video.
+  </video>
+</div>
+
+<!-- Cards Section Ends -->

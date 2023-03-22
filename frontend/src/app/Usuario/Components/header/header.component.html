@@ -1,0 +1,86 @@
+<!-- Header Section starts -->
+<header class="header" #header>
+  <a [routerLink]="['/']" class="logo"
+    ><img src="assets/images/escudovb.png" alt="" />
+  </a>
+
+  <nav class="navbar" #navbar>
+    <div id="nav-close" class="fas fa-times"></div>
+    <div class="iconBurguer stylesIcon" #iconBuger (click)="stateBurger()">☰</div>
+    <div class="iconXBurguer stylesIcon" #iconXBuger >
+      <span (click)="stateBurger()">X</span>
+    </div>
+    <div class="contentHref" #contentNav>
+      <a [routerLink]="['/']">Inicio</a>
+      <a [routerLink]="['/que_hacer']">¿Qué hacer?</a>
+      <a [routerLink]="['/eventos']">Eventos</a>
+    </div>
+
+  </nav>
+
+  <div class="icons">
+    <div id="menu-btn" class="fas fa-bars"></div>
+  </div>
+
+  <!-- SideBar Starts  -->
+<!-- <div class="sidebar" #sideBar>
+    <div class="hamburger-menu__container" (click)="openMenu()">
+      <div class="hamburger-menu">
+        <img src="assets/images/logo.png" alt="" class="logomenu" />
+      </div>
+    </div>
+    <nav class="nav">
+      <nav class="nav__item">
+        <img
+          src="assets/images/circle-info-solid.svg"
+          alt=""
+          class="nav__item-icon"
+          (click)="onClickinfo($event)"
+        />
+        <span class="nav__item-text">Información</span>
+      </nav>
+      <nav class="nav__item">
+        <img src="assets/images/map.svg" alt="" class="nav__item-icon" />
+        <span class="nav__item-text">Mapa Turístico</span>
+      </nav>
+      <nav class="nav__item">
+        <img
+          src="assets/images/utensils.svg"
+          alt=""
+          class="nav__item-icon"
+          (click)="onClickal($event)"
+        />
+        <span class="nav__item-text">Alimentación</span>
+      </nav>
+      <nav class="nav__item">
+        <img
+          src="assets/images/medical-support.svg"
+          alt=""
+          class="nav__item-icon"
+          (click)="onClicksalud($event)"
+        />
+        <span class="nav__item-text">Salud</span>
+      </nav>
+      <nav class="nav__item">
+        <img
+          src="assets/images/bus.svg"
+          alt=""
+          class="nav__item-icon"
+          (click)="onClicktrans($event)"
+        />
+        <span class="nav__item-text">Transporte</span>
+      </nav>
+      <nav class="nav__item">
+        <img
+          src="assets/images/credit-card-regular.svg"
+          alt=""
+          class="nav__item-icon"
+          (click)="onClickser($event)"
+        />
+        <span class="nav__item-text">Servicios</span>
+      </nav>
+    </nav>
+  </div>  -->
+  <!-- SideBar Ends -->
+</header>
+<!-- Header Section ends -->

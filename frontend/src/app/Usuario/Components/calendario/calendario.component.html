@@ -1,0 +1,29 @@
+<div class="month" [ngStyle]="{'border': '5px solid ' + color}">
+  <div class="name-bg" [ngStyle]="{'background-color': color}">
+    <h4 class="month-name">{{names[mes]}}</h4>
+  </div>
+  <table class="calendar-table">
+    <thead>
+      <tr class="head-row">
+        <th>D</th>
+        <th>L</th>
+        <th>M</th>
+        <th>M</th>
+        <th>J</th>
+        <th>V</th>
+        <th>S</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="body-row" *ngFor="let row of arrayDias; let i = index">
+        <td *ngFor="let dia of row"
+          [ngStyle]="{'color': comprobarMesActual(dia.format('MM')) ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.1)'}"
+          [ngClass]="{'with-event': eventosEsteDia(dia.format('YYYY-MM-DD'))?.length && comprobarMesActual(dia.format('MM'))}"
+          (click)="handleClick(dia, i)"
+        >
+          {{dia.format("DD")}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

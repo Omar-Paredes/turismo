@@ -1,0 +1,232 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #showTable>
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Sub Secciones</h2>
+
+          <div class="acciones">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="openModal(template)"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Foto</th>
+           <!--      <th>Video</th> -->
+<!--                 <th>Link</th> -->
+<!--                 <th>Seccion</th> -->
+                <th>Acciones</th>
+                <th>Atractivos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sub_seccion of sub_secciones; index as i">
+                <th>{{ i + 1 }}</th>
+                <td>{{ sub_seccion.nombre }}</td>
+                <td width="350">{{ sub_seccion.descripcion }}</td>
+                <td>
+                  <div class="crud-img-container"><img class="crud-img" src="{{ sub_seccion.foto }}" alt="Imagen" /></div>
+                </td>
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-naranja"
+                      (click)="openModal(template, sub_seccion)"
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-rojo"
+                      (click)="delete(sub_seccion)"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-lila"
+                      (click)="assignAtractivoModal(templateSeccion, sub_seccion)"
+                    >
+                      Agregar Atractivo
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-celeste"
+                      (click)="
+                      undoAtractivoModal(templateUndoSections, sub_seccion)
+                      "
+                    >
+                      Quitar Atractivo
+                    </button>
+                  </div>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre"
+              [formControl]="nombre"
+            />
+            <small *ngIf="nombre.errors?.required && errores"
+              ><b>Nombre requerido</b></small
+            >
+            <small *ngIf="nombre.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="nombre.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Descripcion:</label
+            >
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Descripcion"
+              [formControl]="descripcion"
+              rows="5"
+            ></textarea>
+            <small *ngIf="descripcion.errors?.required && errores"
+              ><b>Descripcion requerida</b></small
+            >
+            <small *ngIf="descripcion.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 200 caracteres</b></small
+            >
+            <small *ngIf="descripcion.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3 modal-file">
+            <label for="exampleInputEmail1" class="form-label">Imágen:</label>
+            <input
+              type="file"
+              (change)="onChange($event)"
+              class="form-control"
+              placeholder="Ingrese una foto"
+              [formControl]="foto"
+              accept=".jpg,.jpeg,.png"
+            />
+            <small *ngIf="foto.errors?.required && errores"
+              ><b>Imágen requerida</b></small
+            >
+            <img class="modal-img" *ngIf="myImage" [src]="myImage" alt="Imagen" />
+          </div>
+        </div>
+
+        <progress class="barra-progreso" value="{{progress}}" max="100"></progress>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">
+              {{ btnTitle }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      
+      <!--                     Modales Agregar Atractivos        -->
+      <ng-template #templateSeccion>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let noAsignado of noAsignados"
+        >
+          <input
+            type="checkbox"
+            id="{{ noAsignado.id }}"
+            value="{{ noAsignado.id }}"
+            (change)="obtenerIdNoAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ noAsignado.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="assignSecciones()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #templateUndoSections>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let atractAsign of atractivosAssigneds"
+        >
+          <input
+            type="checkbox"
+            id="{{ atractAsign.id }}"
+            value="{{ atractAsign.id }}"
+            (change)="obtenerIdAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ atractAsign.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="deallocateSections()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</ng-template>

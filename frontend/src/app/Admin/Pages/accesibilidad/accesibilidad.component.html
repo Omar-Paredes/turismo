@@ -1,0 +1,132 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #showTable>
+  <div class="crud-container">
+    <div class="details">
+      <!-- Lista de accesibilidad-->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Accesibilidades</h2>
+          <div class="acciones">
+            <!-- <a href="#" class="btn btn-lila">Ver todo</a> -->
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="openModal(template)"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Tipo Via</td>
+                <td>Estado Via</td>
+                <td>Acciones</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let accesibilidad of accesibilidades; index as i">
+                <th>{{ i + 1 }}</th>
+                <td>{{ accesibilidad.tipo_de_via }}</td>
+                <td>{{ accesibilidad.estado_de_via }}</td>
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-table btn-naranja"
+                      (click)="openModal(template, accesibilidad)"
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-table btn-rojo"
+                      (click)="delete(accesibilidad)"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Tipo de Vía:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese un tipo_de_via"
+              [formControl]="tipo_de_via"
+            />
+            <small *ngIf="tipo_de_via.errors?.required && errores"
+              ><b>Tipo de Via requerido</b></small
+            >
+            <small *ngIf="tipo_de_via.errors?.minlength && errores"
+              ><b>El tipo de via debe tener almenos 3 caracteres</b></small
+            >
+            <small *ngIf="tipo_de_via.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="tipo_de_via.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Estado de Vía:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese un estado_de_via"
+              [formControl]="estado_de_via"
+            />
+            <small *ngIf="estado_de_via.errors?.required && errores"
+              ><b>Estado de Vía requerido</b></small
+            >
+            <small *ngIf="estado_de_via.errors?.maxlength && errores"
+              ><b>Este campo no debe superar los 50 caracteres</b></small
+            >
+            <small *ngIf="estado_de_via.errors?.pattern && errores"
+              ><b>Caracteres Inválidos</b></small
+            >
+          </div>
+
+       
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">
+              {{ btnTitle }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

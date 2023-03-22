@@ -1,0 +1,91 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+
+
+<ng-template #showTable>
+<div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Actividades</h2>
+          
+          <div class="acciones">
+            <!-- <a href="#" class="btn btn-lila">Ver todo</a> -->
+            <button type="button" class="btn btn-celeste" (click)="openModal(template)">Agregar</button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+<!--                 <th>Foto</th> -->
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let actividad  of actividades; index as i">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ actividad.nombre }}</td>
+                <td>{{ actividad.descripcion }}</td>
+ <!--                <td><img src="{{ actividad.foto }}" width="200px" alt="Imagen"></td> -->
+                <td>
+                  <div class="botones">
+                    <button type="button" class="btn btn-naranja" (click)="openModal(template,actividad)">Modificar</button>
+                    <button type="button" class="btn btn-rojo"(click)="delete(actividad)">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" placeholder="Ingrese una nombre" [formControl]="nombre">
+            <small *ngIf="nombre.errors?.required && errores"><b>Nombre requerida</b></small>
+            <small *ngIf="nombre.errors?.maxlength && errores"><b>Este campo no debe superar los 50 caracteres</b></small>
+            <small *ngIf="nombre.errors?.pattern && errores"><b>Caracteres Inválidos</b></small>
+          </div>
+      
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Descripción:</label>
+            <textarea type="text" class="form-control" placeholder="Ingrese una descripcion" [formControl]="descripcion" rows="3"></textarea>
+            <small *ngIf="descripcion.errors?.required && errores"><b>Descripción requerida</b></small>
+            <small *ngIf="descripcion.errors?.maxlength && errores"><b>Este campo no debe superar los 200 caracteres</b></small>
+            <small *ngIf="descripcion.errors?.pattern && errores"><b>Caracteres Inválidos</b></small>
+          </div>
+      
+         <!--  <div class="mb-3 modal-file">
+              <label for="exampleInputEmail1" class="form-label">Foto:</label>
+              <input type="file" (change)="onChange($event)" class="form-control"  placeholder="Ingrese una foto" [formControl]="foto">
+              <small *ngIf="foto.errors?.required && errores"><b>Foto requerida</b></small>
+              <img class="modal-img" *ngIf="myImage" [src]="myImage" alt="foto">
+          </div>
+ -->
+       
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">{{ btnTitle }}</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

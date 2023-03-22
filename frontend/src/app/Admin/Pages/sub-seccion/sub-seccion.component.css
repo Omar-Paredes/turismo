@@ -1,0 +1,11 @@
+.barra-progreso {
+  min-width: 500px;
+  height: 8px;
+  color: var(--celeste);
+  accent-color: var(--celeste);
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.barra-progreso::-webkit-progress-bar { background-color: rgb(0, 0, 0, 0.1); }
+.barra-progreso::-moz-progress-bar { background: var(--celeste); }
+.barra-progreso::-webkit-progress-value { background: var(--celeste); }

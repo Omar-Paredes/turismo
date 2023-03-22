@@ -1,0 +1,23 @@
+<div class="backim">
+  <div class="filtro"></div>
+  <img src="assets/images/Pique_macho.png" alt="" srcset="" />
+  <div class="container-txt-btn">
+    <i class="fa-regular fa-credit-card"></i>
+    <h1 class="titulo">Servicios</h1>
+  </div>
+</div>
+<!-- Cards Section Starts -->
+<section class="category">
+  <div class="empty" *ngIf="data.length == 0">Por ahora no tenemos datos en este apartado</div>
+  <div class="box-container">
+    <div class="box" *ngFor="let empresa of data">
+      <img src="{{ empresa.foto }}" alt="" />
+      <h3></h3>
+      <a [routerLink]="['/restaurantesii']" class="btn">{{
+        empresa.nombre
+      }}</a>
+    </div>
+  </div>
+
+</section>
+<!-- Cards Section Ends -->

@@ -1,0 +1,177 @@
+/* .backim {
+  width: 100%;
+  height: 1500px;
+  padding: 0px 0px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.borde {
+  width: 100%;
+  height: 99%;
+  background: none;
+  position: absolute;
+  border: 3px solid white;
+  border-bottom-right-radius: 70px;
+  border-top-right-radius: 70px;
+  right: 5px;
+  top: 5px;
+}
+
+.backim img {
+  height: 100%;
+  max-width: 100%;
+  position: absolute;
+}
+
+.txt2-button {
+  font-size: 7rem;
+  position: absolute;
+  top: 10rem;
+  left: 40%;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  border: white 2px solid;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  font-family: "Arciform", sans-serif;
+  font-weight: normal;
+}
+
+
+.contgri {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  justify-items: stretch;
+  align-items: stretch;
+  column-gap: 100px;
+  row-gap: 10px;
+  margin-bottom: 20px;
+  padding-top: 70rem;
+}
+
+.card1 {
+  position: relative;
+  width: 600px;
+  height: 350px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  transition: 0.5s;
+  margin-left: 20px;
+}
+
+.card1 .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card1 .circle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #472878;
+  clip-path: circle(80px at 15% 75%);
+  transition: 0.5s;
+  opacity: 0.7;
+}
+
+.card1:hover .circle::before {
+  background: #472878;
+  opacity: 0.7;
+  clip-path: circle(400px at center);
+}
+
+.card1 img {
+  position: absolute;
+  top: 75%;
+  left: 15%;
+  bottom: 60px;
+  transform: translate(-50%, -50%);
+  height: 65px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.card1:hover img {
+  left: 80%;
+  height: 80px;
+  top: 20%;
+}
+
+.card1 .content {
+  position: relative;
+  left: 20%;
+  padding: 20px 40px 20px 40px;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card1:hover .content {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  text-align: justify;
+}
+
+.card1 .content h2 {
+  color: #fff;
+  font-size: 2em;
+  line-height: 1em;
+  margin-bottom: 10px;
+  font-family: "Arciform", sans-serif;
+  font-weight: normal;
+  font-size: 4rem;
+}
+
+.card1 .content p {
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+}
+
+
+@media (max-width: 991px) {
+  .card1 {
+    width: auto;
+    max-width: 350px;
+    align-items: flex-start;
+    margin: 10px;
+  }
+
+  .card1:hover {
+    height: 600px;
+  }
+
+  .card1 .content {
+    width: 100%;
+    left: 0;
+    padding: 30px;
+  }
+
+  .card1:hover img {
+    top: 80%;
+    left: 50%;
+    height: 150px;
+  }
+}
+
+@media (max-width: 420px) {
+  .card1 .content {
+    padding: 20px;
+  }
+}
+ */

@@ -1,0 +1,59 @@
+  <div class="crud-container">
+    <div class="details">
+      <!--  order details list -->
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Tipo de Actividades</h2>
+          
+          <div class="acciones">
+            <button type="button" class="btn btn-celeste" (click)="openModal(template)">Agregar</button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tipo of tipos; index as i">
+                <th>{{i+1}}</th>
+                <td>{{tipo.tipo}}</td>
+                <td>
+                  <div class="botones">
+                    <button type="button" class="btn btn-naranja" (click)="openModal(template, tipo)">Editar</button>
+                    <button type="button" class="btn btn-rojo" (click)="delete(tipo)">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+          <div class="form-group">
+              <label for="exampleInputEmail1">Nombre del Tipo de Actividad:</label>
+              <input type="text" class="form-control"  placeholder="Ingresar nombre del Tipo de Actividad" [formControl]="tipo_actividad">
+              <small *ngIf="tipo_actividad.errors?.required && showError"><b> Es requerido ingresar un Tipo de Actividad</b></small>
+              <small *ngIf="tipo_actividad.errors?.maxlength && showError"><b>Este campo no debe superar los 50 caracteres</b></small>
+              <small *ngIf="tipo_actividad.errors?.pattern && showError"><b>Caracteres Inválidos</b></small>
+          </div>   
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="guardar()">{{ btnTitle }}</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>

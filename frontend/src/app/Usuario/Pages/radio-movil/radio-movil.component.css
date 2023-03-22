@@ -1,0 +1,127 @@
+.backim {
+    width: 100%;
+    height: calc(100dvh - 500px);
+    padding: 0px 0px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+  }
+  
+  .backim .filtro {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(30px);
+  }
+  
+  .backim img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .container-txt-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .fa-bell-concierge {
+    font-size: 7rem;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 15px;
+    border-radius: 25px;
+  }
+  
+  .titulo {
+    color: #fff;
+    font-family: "Arciform", sans-serif;
+    font-size: 10rem;
+    padding-top: 50px;
+    text-shadow: 2px 2px 5px #10221b;
+  }
+  
+  .category .box-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media screen and (max-width: 1472px) {
+    .category .box-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  .category .box-container .box {
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category .box-container .box .boxcont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .category .box-container .box img {
+    height: 50rem;
+    width: 30rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-right: 50px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border: 3px solid #57428d;
+  }
+  .category h3 {
+    font-size: 3rem;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 400px;
+    height: 60px;
+    font-family: "Arciform", sans-serif;
+    text-align: center;
+  }
+  
+  .contentres {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subtitle_cont {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+  
+  .subtitle_cont h2 {
+    color: #fff;
+    margin-left: 20px;
+    font-family: "Arciform", sans-serif;
+    font-size: 4rem;
+  }
+  
+  .subtitle_cont .fa-clock {
+    font-size: 5em;
+    color: #fff;
+  }
+  .subtitle_cont .fa-book-open {
+    font-size: 5em;
+    color: #fff;
+  }
+  .subtitle_cont .fa-calendar-days {
+    font-size: 5em;
+    color: #fff;
+  }
+  

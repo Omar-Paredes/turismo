@@ -1,0 +1,142 @@
+.backim {
+  width: 100%;
+  height: calc(100dvh - 52px);
+  padding: 0px 0px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.backim img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.container-txt-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.txt2-button {
+  font-size: 7rem;
+  text-decoration: none;
+  font-family: "Arciform", sans-serif;
+  color: white;
+  background: #57428d;
+  border-radius: 0.75em;
+  width: 780px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.infosec {
+  width: 100%;
+  height: auto;
+  margin: 40px 0 40px 0;
+}
+
+.content {
+  width: 991px;
+  height: 100%;
+  background: #6d56a0;
+  border-radius: 110px;
+  padding: 40px;
+  text-align: center;
+  margin: 0px auto;
+  padding-left: 10rem;
+}
+
+@media (max-width: 1020px) {
+  .content {
+    width: 600px;
+  }
+}
+
+.subtitle_cont {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+@media (max-width: 630px) {
+  .content {
+    width: auto;
+    margin: 3%;
+    padding: 0px;
+  }
+  .subtitle_cont {
+    display: flex;
+    flex-direction: column;
+  }
+  .subtitle_cont h2 {
+    margin-top: 15px;
+  }
+  .content p {
+    padding-left: 0px;
+  }
+}
+
+.subtitle_cont h2 {
+  color: #fff;
+  margin-left: 20px;
+  font-family: "Arciform", sans-serif;
+  font-size: 6rem;
+}
+
+.content p {
+  font-family: "Arciform", sans-serif;
+  font-size: 3rem;
+  line-height: 5rem;
+  text-align: left;
+  padding-left: 10rem;
+  margin-bottom: 5rem;
+  color: white;
+  font-weight: 500;
+}
+
+.subtitle_cont img {
+  width: 80px;
+  height: 80px;
+}
+
+.subtitle_cont .fa-book-open {
+  font-size: 5em;
+  color: #fff;
+}
+
+.subtitle_cont .fa-lightbulb {
+  font-size: 5em;
+  color: #fff;
+}
+
+.subtitle_cont .fa-calendar-days {
+  font-size: 5em;
+  color: #fff;
+}
+
+.category .box-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 6rem;
+}
+
+.category .box-container .box {
+  text-align: center;
+  padding: 1rem;
+}
+.category .box-container .box img {
+  height: 580px;
+  width: 400px;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border: 3px solid white;
+}

@@ -1,0 +1,15 @@
+version: '3.5'
+
+
+services:
+  app: 
+    container_name: turismo
+    build:
+      context: . #donde esta el dockerfile
+      dockerfile: Dockerfile
+    command: "ng serve --host 0.0.0.0 --poll=200 --disable-host-check"  
+    volumes:
+      - .:/app/
+      - /app/node_modules #crear volumen anonimo 
+    ports:
+      - '4200:4200'

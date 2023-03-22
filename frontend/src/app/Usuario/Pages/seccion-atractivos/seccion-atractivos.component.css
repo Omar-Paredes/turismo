@@ -1,0 +1,206 @@
+.backim {
+    width: 100%;
+    /*   height: 1500px; */
+    height: calc(100dvh - 58px); /* we subtract the size of the navbar  */
+    padding: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  
+  .backim::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    background: linear-gradient(0deg, rgba(68, 53, 93, 1) 3%, transparent 25%);
+    /* PARA QUE NO SE VEA UNA LINEA FEA EN EDGE */
+    transform: translateY(1px);
+  }
+
+  .backim img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+  }
+  
+  .txt1-button {
+    font-size: 4rem;
+    position: absolute;
+    top: 8rem;
+    right: 6rem;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    border: white 0.125em solid;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+  }
+  
+  .text-subseccion {
+    position: absolute;
+    bottom: 20rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    z-index: 1;
+    max-width: 600px;
+  }
+
+  .container-txt2 {
+    background-color: #482778;
+    font-size: 6rem;
+    padding: 20px 40px;
+    color: white;
+    font-family: 'Arciform', sans-serif;
+    border-radius: 25px;
+    font-weight: 400;
+    line-height: 80px;
+    text-align: center;
+    margin: 0;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+    animation: appear 2s ease;
+    user-select: none;
+    width: fit-content;
+  }
+
+  .container-txt3 {
+    background-color: rgb(74, 193, 224);
+    font-size: 4rem;
+    padding: 10px 20px;
+    color: white;
+    font-family: 'Arciform', sans-serif;
+    border-radius: 25px;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    margin: 0;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+    animation: appear 2s ease;
+    user-select: none;
+    width: fit-content;
+  }
+  
+  @keyframes appear {
+    0% {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    100%{
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .btn {
+    margin-top: 1rem;
+    display: inline-block;
+    border: 0.2rem solid #57428d;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    font-size: 1.7rem;
+    padding: 1rem 3rem;
+    background-color: #57428d;
+    font-family: "Arciform", sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover {
+    background: rgb(74, 193, 224);
+    color: #fff;
+  }
+  .category {
+    background: #44355D;
+  }
+  .category .box-container {
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .category .box-container .box {
+    display: flex;
+    padding: 1rem;
+    margin: 0px 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flip-box:hover .back-box {
+    opacity: 1;
+  }
+
+  .flip-box {
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 3px solid white;
+  }
+
+  .back-box {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgb(74, 193, 224, 0.8);
+    padding: 30px;
+    border-radius: 50px;
+    overflow: auto;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .back-box > a {
+    font-family: "Arciform", sans-serif;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .category .box-container .box img {
+    height: 50rem;
+    width: 30rem;
+    border-radius: 50px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .category .box-container .box h3 {
+    font-size: 2rem;
+    color: rgb(74, 193, 224);
+  }
+
+  .category .box-container .box p {
+    font-size: 1.7rem;
+    color: white;
+    line-height: 2;
+    font-family: "Arciform", sans-serif;
+  }
+  
+  @media (max-width: 600px) {
+    .container-txt2 {
+      font-size: 3rem;
+      line-height: 48px;
+    }
+
+    .container-txt3 {
+      font-size: 2rem;
+      line-height: 32px;
+    }
+  }

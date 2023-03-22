@@ -1,0 +1,127 @@
+<div class="left-navigation" #navigationLeft>
+  <ul>
+    <li>
+      <a href="/" class="a-logo">
+        <span class="logo"
+          ><img src="assets/img/marcaVertical.png" alt="" class="imagen"
+        /></span>
+      </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/admin/accesibilidad']">
+        <span class="icon"></span>
+        <span class="title">Accesibilidad</span>
+      </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/admin/actividad']">
+        <span class="icon"></span>
+        <span class="title">Actividad</span>
+      </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/admin/atractivo']">
+        <span class="icon"></span>
+        <span class="title">Atractivo</span>
+      </a>
+    </li>
+
+  <!--   <li>
+      <a [routerLink]="['/admin/empresa']">
+        <span class="icon"></span>
+        <span class="title">Empresa</span>
+      </a>
+    </li> -->
+
+    <li>
+      <a [routerLink]="['/admin/estacionalidad']">
+        <span class="icon"></span>
+        <span class="title">Estacionalidad</span>
+      </a>
+    </li>
+
+    <!-- <li>
+            <a [routerLink]="['/admin/restriccion']">
+                <span class="icon"></span>
+                <span class="title">Restricciones</span>
+            </a>
+        </li> -->
+<!-- 
+    <li>
+      <a [routerLink]="['/admin/seccion']">
+        <span class="icon"></span>
+        <span class="title">Sección</span>
+      </a>
+    </li> -->
+
+    <li>
+      <a [routerLink]="['/admin/sub_seccion']">
+        <span class="icon"></span>
+        <span class="title">Sub Sección</span>
+      </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/admin/ubicacion']">
+        <span class="icon"></span>
+        <span class="title">Ubicaciones</span>
+      </a>
+    </li>
+
+   <!--  <li>
+      <a [routerLink]="['/admin/tipo_actividad']">
+        <span class="icon"></span>
+        <span class="title">Tipo Actividad</span>
+      </a>
+    </li> -->
+
+    <li>
+      <a [routerLink]="['/admin/tipo_atractivo']">
+        <span class="icon"></span>
+        <span class="title">Tipo Atractivo</span>
+      </a>
+    </li>
+
+    <!-- <li>
+      <a [routerLink]="['/admin/tipo_empresa']">
+        <span class="icon"></span>
+        <span class="title">Tipo Empresa</span>
+      </a>
+    </li> -->
+
+    <!-- <li>
+            <a [routerLink]="['/admin/tipo_restriccion']">
+                <span class="icon"></span>
+                <span class="title">Tipo Restricción</span>
+            </a>
+        </li> -->
+    <li>
+      <a [routerLink]="['/admin/usuarios']">
+        <span class="icon"></span>
+        <span class="title">Usuarios</span>
+      </a>
+    </li>
+
+    <li>
+      <a style="cursor: pointer" (click)="logout()">
+        <span class="icon"></span>
+        <span class="title">Cerrar Sesión</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- main -->
+<div class="right-main" #navigatioRight>
+  <div class="topbar">
+
+    <div class="toggle" (click)="stateBurger()">
+      <img src="../../../../assets/images/icons/menu.png" alt="" />
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

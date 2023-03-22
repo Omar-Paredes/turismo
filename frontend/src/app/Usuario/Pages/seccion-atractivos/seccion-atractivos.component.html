@@ -1,0 +1,17 @@
+<div *ngIf="loadingData; else show">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #show>
+  <div class="backim">
+    <img src="{{ sec.foto }}" alt="" srcset="" />
+    <div class="text-subseccion">
+      <h2 class="container-txt2">{{ sec.nombre }}</h2>
+      <h3 class="container-txt3">{{ sec.descripcion }}</h3>
+    </div>
+  </div>
+
+  <!-- Cards Section Starts -->
+  <app-atractivo-mapper [atractivos]="secciones"></app-atractivo-mapper>
+  <!-- Cards Section Ends -->
+</ng-template>

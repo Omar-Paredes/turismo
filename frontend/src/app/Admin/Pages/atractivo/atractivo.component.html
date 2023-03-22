@@ -1,0 +1,545 @@
+<div *ngIf="loadingData; else showTable">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #showTable>
+  <div class="crud-container">
+    <div class="details">
+      <div class="recentOrders">
+        <div class="cardHeader">
+          <h2>Atractivos</h2>
+          <div class="acciones">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="openModal(template)"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Código</th>
+                <th>Foto</th>
+                <th>Acompañantes</th>
+                <th>Tipo Atractivo</th>
+                <th>Ubicacion</th>
+                <th>Estacionalidad</th>
+                <th>Accesibilidad</th>
+                <th>Acciones</th>
+                <th>Actividades</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr 
+                *ngFor="let atractivo of atractivos; index as i" 
+                [ngClass]="{'tr-red': !atractivo.tipo_atractivo_id || !atractivo.ubicacion_id|| !atractivo.estacionalidad_id|| !atractivo.accesibilidad_id}"
+              >
+                <th>{{ i + 1 }}</th>
+                <td>{{ atractivo.nombre }}</td>
+                <td>{{ atractivo.codigo }}</td>
+                <td>
+                  <div class="crud-img-container">
+                    <img
+                      class="crud-img"
+                      src="{{ atractivo.foto }}"
+                      alt="Foto"
+                    />
+                  </div>
+                </td>
+                <td width="120px">{{ atractivo.acompaniantes }}</td>
+                <td [ngClass]="{'red-td': !atractivo.tipo_atractivo_id}">
+                  {{ atractivo.tipo_atractivo_nombre ? atractivo.tipo_atractivo_nombre : "Sin datos" }}
+                </td>
+                <td [ngClass]="{'red-td': !atractivo.ubicacion_id}">
+                  {{ atractivo.altitud ? atractivo.altitud : "Sin datos" }}
+                </td>
+                <td width="150px" [ngClass]="{'red-td': !atractivo.estacionalidad_id}">
+                  {{ atractivo.temporada ? atractivo.temporada : "Sin datos" }}
+                </td>
+                <td width="150px" [ngClass]="{'red-td': !atractivo.accesibilidad_id}">
+                  {{ atractivo.tipo_de_via ? atractivo.tipo_de_via : "Sin datos" }}
+                </td>
+                <td> <!-- Boton modificar - eliminar Atractivo -->
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-verde"
+                      (click)="navegar(atractivo.id)"
+                      [disabled]="!atractivo.tipo_atractivo_id || !atractivo.ubicacion_id || !atractivo.estacionalidad_id|| !atractivo.accesibilidad_id"
+                      [attr.title]="
+                        (!atractivo.tipo_atractivo_id || !atractivo.ubicacion_id || !atractivo.estacionalidad_id|| !atractivo.accesibilidad_id) ?
+                        'No se puede visitar por que faltan datos, este atractivo no aparecerá en sus respectivas subsecciones' : ''
+                      "
+                    >
+                      Visitar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-naranja"
+                      (click)="openModal(template, atractivo)"
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-rojo"
+                      (click)="delete(atractivo)"
+                    >
+                      Eliminar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-destacado"
+                      (click)="changeDestacadoMes(atractivo)"
+                      [ngClass]="{'btn-destacado-active': atractivo.destacado_mes === true}"
+                      [disabled]="!atractivo.tipo_atractivo_id || !atractivo.ubicacion_id || !atractivo.estacionalidad_id|| !atractivo.accesibilidad_id"
+                      [attr.title]="
+                        (!atractivo.tipo_atractivo_id || !atractivo.ubicacion_id || !atractivo.estacionalidad_id|| !atractivo.accesibilidad_id) ?
+                        'No se puede destacar por que faltan datos' : ''
+                      "
+                    >
+                      {{atractivo.destacado_mes ? "¡Destacado!" : "Destacar"}}
+                    </button>
+                  </div>
+                </td>
+          
+                <td>
+                  <div class="botones">
+                    <button
+                      type="button"
+                      class="btn btn-lila"
+                      (click)="assignActividadesModal(templateActividadesAsignadas, atractivo)"
+                    >
+                      Agregar Actividad
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-celeste"
+                      (click)="undoActividadesModal(templateActividadesDelete, atractivo)"
+                    >
+                      Quitar Actividad
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-verde"
+                      (click)="estadoActividadesModal(templateActividadesEstado, atractivo)"
+                    >
+                      Estado Actividad
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #template>
+        <div class="modal-header colorheader">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body colorBody">
+          <div class="row">
+            <!-- <div class="col-md-10 m-auto"> -->
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese un nombre"
+                [formControl]="nombre"
+              />
+              <small *ngIf="nombre.errors?.required && errores"
+                ><b>Nombre requerido</b></small
+              >
+              <small *ngIf="nombre.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 50 caracteres</b></small
+              >
+              <small *ngIf="nombre.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label">Código:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese un código"
+                [formControl]="codigo"
+              />
+              <small *ngIf="codigo.errors?.required && errores"
+                ><b>Codigo requerido</b></small
+              >
+              <small *ngIf="codigo.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 20 caracteres</b></small
+              >
+              <small *ngIf="codigo.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-12 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Descripción:</label
+              >
+              <textarea
+                type="text"
+                class="form-control"
+                placeholder="Ingrese una descripcion"
+                [formControl]="descripcion"
+                rows="5"
+              ></textarea>
+              <small *ngIf="descripcion.errors?.required && errores"
+                ><b>Descripcion requerida</b></small
+              >
+              <small *ngIf="descripcion.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 200 caracteres</b></small
+              >
+              <small *ngIf="descripcion.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-12 modal-file mtop15">
+              <label for="exampleInputEmail1" class="form-label">Foto:</label>
+              <input
+                type="file"
+                (change)="onChangeFoto($event)"
+                class="form-control"
+                placeholder="Ingrese una foto"
+                [formControl]="foto"
+                accept=".png,.jpg,.jpeg"
+              />
+              <small *ngIf="(foto.errors?.required && errores) && !myFoto"
+                ><b>Foto requerida</b></small
+              >
+              <img
+                class="modal-img"
+                *ngIf="myFoto"
+                [src]="myFoto"
+                alt="Imagen"
+              />
+            </div>
+
+            <div class="col-md-12 modal-file mtop15">
+              <label for="exampleInputEmail1" class="form-label">Imágen 360:</label>
+              <input
+                type="file"
+                (change)="onChange($event)"
+                class="form-control"
+                placeholder="Ingrese una foto"
+                [formControl]="imagen"
+                accept=".png,.jpg,.jpeg"
+              />
+              <small *ngIf="(imagen.errors?.required && errores) && !myImage"
+                ><b>Imágen 360 requerida</b></small
+              >
+              <img
+                class="modal-img"
+                *ngIf="myImage"
+                [src]="myImage"
+                alt="Imagen"
+              />
+            </div>
+
+            <div class="col-md-12 modal-file mtop15">
+              <label for="exampleInputEmail1" class="form-label">Video:</label>
+              <input
+                type="file"
+                (change)="onChangeVideo($event)"
+                class="form-control"
+                placeholder="Ingrese un video"
+                [formControl]="video"
+                accept=".mp4,.avi,.mkv,.flv,.mov"
+              />
+              <small *ngIf="(video.errors?.required && errores) && !myVideo"
+                ><b>Video requerido</b></small
+              >
+              <video
+                class="modal-img"
+                *ngIf="myVideo"
+                [src]="myVideo"
+                alt="Video"
+                controls
+              ></video>
+            </div>
+
+            <div class="col-md-12 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Acompañantes</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese Acompañantes"
+                [formControl]="acompaniantes"
+              />
+              <small *ngIf="acompaniantes.errors?.required && errores"
+                ><b>Acompañantes requerido</b></small
+              >
+              <small *ngIf="acompaniantes.errors?.maxlength && errores"
+                ><b>Este campo no debe superar los 50 caracteres</b></small
+              >
+              <small *ngIf="acompaniantes.errors?.pattern && errores"
+                ><b>Caracteres Inválidos</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Tipo Atractivo:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione tipo de atractivo"
+                [formControl]="tipo_atractivo_id"
+              >
+                <option
+                  value="{{ tipo_atractivo.id }}"
+                  *ngFor="let tipo_atractivo of tipo_atractivos"
+                >
+                  {{ tipo_atractivo.nombre }}
+                </option>
+              </select>
+              <small *ngIf="tipo_atractivo_id.errors?.required && errores"
+                ><b>Seleccione un tipo de atractivo</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Ubicacion:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione tipo de atractivo"
+                [formControl]="ubicacion_id"
+              >
+                <option
+                  value="{{ ubicacion.id }}"
+                  *ngFor="let ubicacion of ubicaciones"
+                >
+                  {{ ubicacion.informacion }}
+                </option>
+              </select>
+              <small *ngIf="ubicacion_id.errors?.required && errores"
+                ><b>Seleccione una ubicacion</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Accesibilidad:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione una accesibilidad"
+                [formControl]="accesibilidad_id"
+              >
+                <option
+                  value="{{ accesibilidad.id }}"
+                  *ngFor="let accesibilidad of accesibilidades"
+                >
+                  {{ accesibilidad.tipo_de_via }}
+                </option>
+              </select>
+              <small *ngIf="accesibilidad_id.errors?.required && errores"
+                ><b>Seleccione una accesibilidad</b></small
+              >
+            </div>
+
+            <div class="col-md-6 mtop15">
+              <label for="exampleInputEmail1" class="form-label"
+                >Estacionalidad:</label
+              >
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Seleccione una Estacionalidad"
+                [formControl]="estacionalidad_id"
+              >
+                <option
+                  value="{{ estacionalidad.id }}"
+                  *ngFor="let estacionalidad of estacionalidades"
+                >
+                  {{ estacionalidad.temporada }}
+                </option>
+              </select>
+              <small *ngIf="estacionalidad_id.errors?.required && errores"
+                ><b>Seleccione una estacionalidad</b></small
+              >
+            </div>
+
+            <!-- </div> -->
+          </div>
+        </div>
+        <progress class="barra-progreso" value="{{(progressFoto + progressImage + progressVideo) / 3}}" max="100"></progress>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button type="button" class="btn btn-celeste" (click)="save()">
+              {{ btnTitle }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      
+      <!-- Modal Agregar Actividad -->
+      <ng-template #templateActividadesAsignadas>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let noAsignado of noAsignados"
+        >
+          <input
+            type="checkbox"
+            id="{{ noAsignado.id }}"
+            value="{{ noAsignado.id }}"
+            (change)="obtenerIdNoAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ noAsignado.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="assignActividades()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <!-- Modal Quitar Actividad -->
+      <ng-template #templateActividadesDelete>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let sectionsAssigned of sectionsAssigneds"
+        >
+          <input
+            type="checkbox"
+            id="{{ sectionsAssigned.id }}"
+            value="{{ sectionsAssigned.id }}"
+            (change)="obtenerIdAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ sectionsAssigned.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="deallocateActividades()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Modal Estado Actividad -->
+      <ng-template #templateActividadesEstado>
+        <div class="modal-header colorheader">
+          <h3>Cambiar Estado</h3>
+        </div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let sectionsAssigned of estadoSectionsAssigneds"
+        >
+          <label for="vehicle1">{{ sectionsAssigned.nombre }}</label>
+            <button *ngIf= "sectionsAssigned.estado == 'habilitado'" class="btn btn-verde" (click)="updateEstado(sectionsAssigned)" style="margin-left: 20px;">✔ Habilitado</button> 
+            <button *ngIf= "sectionsAssigned.estado == 'deshabilitado'" class="btn btn-rojo" (click)="updateEstado(sectionsAssigned)" style="margin-left: 20px;">✖ Deshabilitado</button> 
+
+          <br>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </ng-template>
+
+      <!-- Modal Agregar Empresa -->
+      <ng-template #templateEmpresasAsignadas>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let noAsignado of empresaNoAsignados"
+        >
+          <input
+            type="checkbox"
+            id="{{ noAsignado.id }}"
+            value="{{ noAsignado.id }}"
+            (change)="empresaObtenerIdNoAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ noAsignado.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="assignEmpresas()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <!-- Modal Quitar Empresa -->
+      <ng-template #templateEmpresasDelete>
+        <div class="modal-header colorheader"></div>
+        <div
+          class="modal-body colorBody"
+          *ngFor="let sectionsAssigned of sectionsAssigneds"
+        >
+          <input
+            type="checkbox"
+            id="{{ sectionsAssigned.id }}"
+            value="{{ sectionsAssigned.id }}"
+            (change)="empresaObtenerIdAsiggnedCheck($event)"
+          />
+          <label for="vehicle1">{{ sectionsAssigned.nombre }}</label
+          ><br />
+        </div>
+        <div class="modal-footer">
+          <div class="contenedor-boton">
+            <button
+              type="button"
+              class="btn btn-celeste"
+              (click)="deallocateEmpresas()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

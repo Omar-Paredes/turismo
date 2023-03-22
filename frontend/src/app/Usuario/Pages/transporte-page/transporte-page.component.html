@@ -1,0 +1,22 @@
+<div class="backim">
+  <div class="filtro"></div>
+  <img src="assets/images/Pique_macho.png" alt="" srcset="" />
+  <div class="container-txt-btn">
+    <i class="fa-solid fa-bus"></i>
+    <h1 class="titulo">Transporte</h1>
+  </div>
+</div>
+<!-- Cards Section Starts -->
+<section class="category">
+  <div class="empty" *ngIf="data.length == 0">
+    Por ahora no tenemos datos en este apartado
+  </div>
+  <div class="box-container">
+    <div class="box">
+      <img src="assets/images/moviles/taxi.jpg" alt="" />
+      <h3></h3>
+      <a [routerLink]="['/radio-movil']" class="btn"> radio movil </a>
+    </div>
+  </div>
+</section>
+<!-- Cards Section Ends -->

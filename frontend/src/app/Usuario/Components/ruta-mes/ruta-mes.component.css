@@ -1,0 +1,124 @@
+section {
+  padding: 0;
+}
+
+.heading {
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  font-size: 4rem;
+  cursor: pointer;
+  font-family: "Arciform", sans-serif;
+}
+
+.heading {
+  text-align: center;
+  font-size: 3.4rem;
+  color: white;
+  background: rgb(74, 193, 224);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin: 0px;
+}
+
+.heading:hover {
+  filter: grayscale(0.3);
+}
+
+.rutam-container {
+  display: flex;
+  font-size: 30px;
+  text-align: center;
+  align-items: center;
+  background-color: #6d56a0;
+  position: relative;
+}
+
+.rutam-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  background: linear-gradient(0deg, rgba(72,39,120,1) 3%, transparent 25%);
+  /* PARA QUE NO SE VEA UNA LINEA FEA EN EDGE */
+  transform: translateY(1px);
+}
+
+.img-left .prev {
+  width: 100%;
+  height: calc(100dvh - 152px);
+  object-fit: cover;
+}
+
+.txt2-button {
+  font-size: 4rem;
+  text-decoration: none;
+  position: absolute;
+  bottom: 50px;
+  color: white;
+  border: white 0.125em solid;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+}
+
+.text-right {
+  margin: 0;
+  flex: 30%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.heading-content {
+  text-align: center;
+  font-size: 3.4rem;
+  color: #fff;
+  font-family: "Arciform", sans-serif;
+}
+
+.subtitle {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 4rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.content {
+  align-items: center;
+  text-align: justify;
+  font-size: 1.7rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+  line-height: 30px;
+  display: -webkit-box;
+  -webkit-line-clamp: 11;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: "Arciform", sans-serif;
+}
+
+.cml-link {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.cml-link a {
+  color: #fff;
+  font-size: 1.7rem;
+  font-family: "Arciform", sans-serif;
+}
+
+@media (max-width: 1444px) {
+  .rutam-container {
+    flex-direction: column;
+  }
+  
+  .img-left {
+    width: 100%;
+  }
+}

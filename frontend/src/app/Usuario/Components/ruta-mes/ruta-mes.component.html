@@ -1,0 +1,22 @@
+<!-- Ruta mes Section Starts -->
+<h1 *ngIf="atractivo" class="heading" (click)="onClickrutames($event)">¡Destacado del mes!</h1>
+<section class="about" id="about" *ngIf="atractivo">
+  <div class="rutam-container">
+    <div class="img-left">
+      <img class="prev" src="{{atractivo?.foto}}" alt="" />
+      <!-- <a href="#" class="txt2-button">Ruta Turística del Mes</a> -->
+    </div>
+    <div class="text-right">
+      <h1 class="heading-content">{{atractivo?.nombre}}</h1>
+      <h3 class="subtitle"></h3>
+      <p class="content">
+        {{atractivo?.descripcion}}
+      </p>
+      <div class="cml-link">
+        <a href="{{ publicURLVR + atractivo?.id }}">Cómo llegar <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<!-- Ruta mes Section Ends -->
