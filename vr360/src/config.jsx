@@ -5,9 +5,9 @@ const config = {
     urlPrincipal: "http://127.0.0.1:4200/#/"
   },
   production: {
-    endpoint: "https://alcaldia-turismo-laravel-production.up.railway.app/api/",
-    urlPage: "https://cochabamba-turismo-360.web.app/#/",
-    urlPrincipal: "https://cochabamba-turismo.web.app/#/"
+    endpoint: "https://turismoapidev.cochabamba.bo/api/",
+    urlPage: "https://turismo360dev.cochabamba.bo/",
+    urlPrincipal: "https://turismodev.cochabamba.bo/"
   } 
 };
 

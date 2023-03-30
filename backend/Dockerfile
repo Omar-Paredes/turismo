@@ -1,29 +1,49 @@
-# Usa la imagen oficial de PHP 8.0 como imagen base
-FROM php:8.0
+FROM php:8.0-fpm
 
-# Instala las dependencias requeridas para Laravel
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    unzip \
-    && docker-php-ext-install zip
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    nano \
+    libpq-dev
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install exif
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install gd intl
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pgsql
+RUN docker-php-ext-install pdo_pgsql
 
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Establece el directorio de trabajo
-WORKDIR /var/www/html
+WORKDIR /var/www
+COPY .env.example .env
 
-# Copia los archivos de la aplicación a la imagen de Docker
-COPY . /var/www/html
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-# Instala las dependencias de Laravel usando Composer
-RUN composer install
+# Set working directory
+##COPY /backup/.env.example .env
 
-# Establece los permisos de los archivos y carpetas
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+##RUN php composer.phar install -d /var/www
+#RUN php artisan key:generate
 
-# Expone el puerto 8000
-EXPOSE 8000
-
-# Ejecuta el servidor web de Laravel
-CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "8000"]
+USER $user

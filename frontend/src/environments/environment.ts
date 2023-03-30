@@ -6,8 +6,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://127.0.0.1:8000/api/',
-  local: 'http://127.0.0.1:4200/#/'
+  url: 'http://192.168.104.215:8000/api/',
+  local: 'http://192.168.104.215:85'
 };
 
 

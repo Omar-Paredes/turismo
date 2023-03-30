@@ -1,1 +1,1 @@
-export const angularURL = "localhost:4200/";
+export const angularURL = "turismodev.cochabamba.bo/";

@@ -1,24 +1,46 @@
-version: '3.7'
-
+version: "3.7"
 services:
-  web:
-    build: .
-    ports:
-      - "8000:8000"
+  app:
+    build:
+      args:
+        user: www
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: laravel-php
+    container_name: laravel-php
+    restart: unless-stopped
+    working_dir: /var/www/
     volumes:
-      - .:/app
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_DATABASE: db_cidtec_turismo
-      DB_USERNAME: postgres
-      DB_PASSWORD: secret
-
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+      
   db:
     image: postgres
-    environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+    container_name: laravel-db
+    restart: unless-stopped
+    volumes:
+      - "./postgres/backup:/backup/"
+      - "./postgres/data:/var/lib/postgresql/data:delegated"
+    env_file:
+      - postgres/database.env # configure postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

@@ -1,10 +1,10 @@
 export const environment = {
-  production: false,
-  url: 'https://localhost:8001/api/',
-  local: 'https://localhost:4200/#/',
+  production: true,
+  url: 'https://turismoapidev.cochabamba.bo/api/',
+  local: 'https://turismodev.cochabamba.bo/#/',
 };
 
-export const urlVR = 'https://cochabamba-turismo-360.web.app/#/';
+export const urlVR = 'https://turismo360dev.cochabamba.bo/#/';
 
 //explication of routes
 /*
