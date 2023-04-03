@@ -393,11 +393,14 @@ export class AtractivoComponent implements OnInit {
   public progressImage: number = 0;
   public progressVideo: number = 0;
 
-  async sendCloudinary(val: File, opt: string) {
+  async sendCloudinary(val: File, opt: string,  sistema_id: string, collector: string) {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
       formData.append('file', val);
       formData.append('upload_preset', 'wqazrcl1');
+      formData.append('sistema_id', '00e8a371-8927-49b6-a6aa-0c600e4b6a19');
+      formData.append('collector', 'turismo');
+     
 
       const req = new XMLHttpRequest();
       req.open('POST', `https://repositoriogamc.cochabamba.bo/api/v1/repository/upload-files`);
