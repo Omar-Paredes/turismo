@@ -400,7 +400,7 @@ export class AtractivoComponent implements OnInit {
       formData.append('upload_preset', 'wqazrcl1');
 
       const req = new XMLHttpRequest();
-      req.open('POST', `https://api.cloudinary.com/v1_1/dqu6qcszt/upload`);
+      req.open('POST', `https://repositoriogamc.cochabamba.bo/api/v1/repository/upload-files`);
       req.upload.addEventListener('progress', (e) => {
         if (opt === 'imagen') {
           this.progressImage = (e.loaded / e.total) * 100;
