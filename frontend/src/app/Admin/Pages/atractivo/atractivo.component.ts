@@ -393,7 +393,7 @@ export class AtractivoComponent implements OnInit {
   public progressImage: number = 0;
   public progressVideo: number = 0;
 
-  async sendCloudinary(val: File, opt: string,  sistema_id: string, collector: string) {
+  async sendCloudinary(val: File, opt: string) {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
       formData.append('file', val);
