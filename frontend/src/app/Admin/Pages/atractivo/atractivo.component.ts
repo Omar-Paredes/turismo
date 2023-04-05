@@ -22,6 +22,7 @@ import readFile from 'src/utilities/base64.core';
 import { urlVR } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { validarInputFile } from 'src/utilities/validarInputFile';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-atractivo',
@@ -91,7 +92,8 @@ export class AtractivoComponent implements OnInit {
     private service_estacionalidad: EstacionalidadService,
     private service_accesibilidad: AccesibilidadService,
     private service_ubicacion: UbicacionService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private http: HttpClient,
   ) {}
 
   openModal(template: TemplateRef<any>, atractivo?: IAtractivo) {
@@ -396,25 +398,28 @@ export class AtractivoComponent implements OnInit {
   async sendCloudinary(val: File, opt: string) {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
-      formData.append('file', val);
-      formData.append('upload_preset', 'wqazrcl1');
+      formData.append('documens_files[]', val);
       formData.append('sistema_id', '00e8a371-8927-49b6-a6aa-0c600e4b6a19');
       formData.append('collector', 'turismo');
      
-
+      
       const req = new XMLHttpRequest();
       req.open('POST', `https://repositoriogamc.cochabamba.bo/api/v1/repository/upload-files`);
-      req.upload.addEventListener('progress', (e) => {
+      
+       req.upload.addEventListener('progress', (e) => {
+        
         if (opt === 'imagen') {
+          
           this.progressImage = (e.loaded / e.total) * 100;
         } else if (opt === 'video') {
           this.progressVideo = (e.loaded / e.total) * 100;
         } else {
           this.progressFoto = (e.loaded / e.total) * 100;
         }
-      });
+      }); 
 
       req.addEventListener('load', () => {
+        
         resolve(req.response);
       });
 
@@ -442,17 +447,23 @@ export class AtractivoComponent implements OnInit {
 
     if (this.fileFoto) {
       const url: any = await this.sendCloudinary(this.fileFoto, 'foto');
-      this.myFoto = JSON.parse(url).url;
+      const response = JSON.parse(url);
+      this.myFoto = response.response[0].url_file;
+      console.log('url de la imagen', this.myFoto);
     }
     this.progressFoto = 100;
+    
     if (this.fileImagen) {
       const url: any = await this.sendCloudinary(this.fileImagen, 'imagen');
-      this.myImage = JSON.parse(url).url;
+      const response = JSON.parse(url);
+      this.myImage = response.response[0].url_file;
     }
     this.progressImage = 100;
+    
     if (this.fileVideo) {
       const urlVideo: any = await this.sendCloudinary(this.fileVideo, 'video');
-      this.myVideo = JSON.parse(urlVideo).url;
+      const response = JSON.parse(urlVideo);
+      this.myVideo = response.response[0].url_file;
     }
     this.progressVideo = 100;
 
