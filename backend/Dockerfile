@@ -33,8 +33,8 @@ RUN docker-php-ext-install pdo_pgsql
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /var/www
-COPY . .
 COPY .env.example .env
+COPY . .
 
 # Create system user to run Composer and Artisan Commands
 #RUN useradd -G www-data,root -u $uid -d /home/$user $user
