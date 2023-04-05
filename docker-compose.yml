@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
     volumes:
       - "./backend/postgres/backup:/backup/"
-      - "./backend/postgres/data:/var/lib/postgresql/data:delegated"
+      - "/srv/backup/75/postgres/data:/var/lib/postgresql/data:delegated"
     env_file:
       - backend/postgres/database.env # configure postgres
     ports:
