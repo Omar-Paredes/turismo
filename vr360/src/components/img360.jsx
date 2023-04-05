@@ -4,7 +4,7 @@ const Img360 = ({ data, inlineStyle, showDes }) => {
   return (
     <div style={inlineStyle} className="embed360 page" data-rotation="0 90 -10">
       <a-scene className="RV">
-      <img src={data.imagen}/>
+        <a-sky src={data.imagen}></a-sky>
       </a-scene>
 
       <div className={(showDes ? "aparecer " : "desaparecer ") + "content360"}>
