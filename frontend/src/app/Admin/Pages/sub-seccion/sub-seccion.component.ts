@@ -186,11 +186,13 @@ export class SubSeccionComponent implements OnInit {
   async sendCloudinary(val: File) {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
-      formData.append('file', val);
-      formData.append('upload_preset', 'wqazrcl1');
-
+      formData.append('documens_files[]', val);
+      formData.append('sistema_id', '00e8a371-8927-49b6-a6aa-0c600e4b6a19');
+      formData.append('collector', 'turismo');
+     
+      
       const req = new XMLHttpRequest();
-      req.open('POST', `https://api.cloudinary.com/v1_1/dqu6qcszt/upload`);
+      req.open('POST', `https://repositoriogamc.cochabamba.bo/api/v1/repository/upload-files`);;
       req.upload.addEventListener('progress', (e) => {
         this.progress = (e.loaded / e.total) * 100;
       });
@@ -217,7 +219,8 @@ export class SubSeccionComponent implements OnInit {
 
     if (this.fileImagen) {
       const url: any = await this.sendCloudinary(this.fileImagen);
-      this.myImage = JSON.parse(url).url;
+      const response = JSON.parse(url);
+      this.myImage = response.response[0].url_file;
     }
     this.progress = 100;
 
