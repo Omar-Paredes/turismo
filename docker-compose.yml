@@ -3,7 +3,7 @@ services:
   app:
     build:
       args:
-        user: www
+        user: www-data
         uid: 1000
       context: ./backend
       dockerfile: Dockerfile

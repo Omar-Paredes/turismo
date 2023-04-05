@@ -33,13 +33,18 @@ RUN docker-php-ext-install pdo_pgsql
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /var/www
+COPY . .
 COPY .env.example .env
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+    chown -R $user:$user /home/$user \
+    chown -R $user:$user /var/www \
+    chmod 644 $user:$user /var/www
 
+RUN composer install
+RUN php artisan key:generate
 # Set working directory
 ##COPY /backup/.env.example .env
 
