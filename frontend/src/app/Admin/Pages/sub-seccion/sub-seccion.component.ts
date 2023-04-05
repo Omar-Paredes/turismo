@@ -221,6 +221,7 @@ export class SubSeccionComponent implements OnInit {
       const url: any = await this.sendCloudinary(this.fileImagen);
       const response = JSON.parse(url);
       this.myImage = response.response[0].url_file;
+      console.log(response.response[0].url_file);
     }
     this.progress = 100;
 
