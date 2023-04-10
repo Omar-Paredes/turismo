@@ -43,8 +43,8 @@ COPY . .
 ##    chown -R $user:$user /var/www \
 ##    chmod 644 $user:$user /var/www
 
-RUN composer install
-RUN php artisan key:generate
+#RUN composer install
+##RUN php artisan key:generate
 # Set working directory
 ##COPY /backup/.env.example .env
 
